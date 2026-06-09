@@ -17,7 +17,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      background: linear-gradient(135deg, #8b0000 0%, #dc143c 50%, #b22222 100%);
       font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
       color: #eee;
       user-select: none;
@@ -27,7 +27,7 @@
       margin-bottom: 12px;
       font-size: 2rem;
       letter-spacing: 4px;
-      color: #4ecca3;
+      color: #fff;
     }
 
     .info {
@@ -38,20 +38,20 @@
     }
 
     .info span {
-      color: #4ecca3;
+      color: #ffeb3b;
       font-weight: bold;
     }
 
     .wrapper {
       position: relative;
-      border: 3px solid #4ecca3;
+      border: 3px solid #ffcccc;
       border-radius: 8px;
-      box-shadow: 0 0 24px rgba(78, 204, 163, 0.3);
+      box-shadow: 0 0 24px rgba(255, 100, 100, 0.4);
     }
 
     canvas {
       display: block;
-      background: #0d1117;
+      background: #5c1010;
     }
 
     .overlay {
@@ -100,7 +100,7 @@
     .hint {
       margin-top: 16px;
       font-size: 0.9rem;
-      color: #888;
+      color: #ffcccc;
     }
   </style>
 </head>
@@ -111,7 +111,7 @@
     <div>最高：<span id="best">0</span></div>
   </div>
   <div class="wrapper">
-    <canvas id="game" width="400" height="400"></canvas>
+    <canvas id="game" width="500" height="500"></canvas>
     <div class="overlay" id="startOverlay">
       <h2>准备开始</h2>
       <p>使用方向键或 WASD 控制蛇的移动</p>
@@ -136,9 +136,9 @@
     const startBtn = document.getElementById("startBtn");
     const restartBtn = document.getElementById("restartBtn");
 
-    const GRID = 20;
-    const COLS = canvas.width / GRID;
-    const ROWS = canvas.height / GRID;
+    const COLS = 50;
+    const ROWS = 50;
+    const GRID = canvas.width / COLS;
     const TICK_MS = 120;
 
     const DIR = {
@@ -187,17 +187,17 @@
     }
 
     function drawCell(x, y, color) {
-      const pad = 1;
+      const pad = GRID > 12 ? 1 : 0;
       ctx.fillStyle = color;
       ctx.fillRect(x * GRID + pad, y * GRID + pad, GRID - pad * 2, GRID - pad * 2);
     }
 
     function draw() {
-      ctx.fillStyle = "#0d1117";
+      ctx.fillStyle = "#5c1010";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // 绘制网格线
-      ctx.strokeStyle = "#1c2333";
+      ctx.strokeStyle = "#7a2020";
       ctx.lineWidth = 0.5;
       for (let i = 0; i <= COLS; i++) {
         ctx.beginPath();
@@ -212,7 +212,7 @@
         ctx.stroke();
       }
 
-      drawCell(food.x, food.y, "#e94560");
+      drawCell(food.x, food.y, "#ffeb3b");
 
       snake.forEach((seg, i) => {
         const color = i === 0 ? "#4ecca3" : "#2d8a6e";
